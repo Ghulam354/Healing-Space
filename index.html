@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIMA Healing Space — Online Curhat & Personal Support</title>
+    <meta name="description" content="Ruang untuk Bercerita, Menguatkan Diri, dan Menemukan Kembali Kebahagiaan. Layanan online curhat dan pendampingan personal yang aman, nyaman, dan tanpa menghakimi.">
+    
+    <!-- Google Fonts: Playfair Display, Dancing Script, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FFFDFC',
+                            100: '#FFF8F6',
+                            200: '#FCECE8',
+                            300: '#F7DCD5',
+                        },
+                        rosebrand: {
+                            50: '#FDF2F5',
+                            100: '#FCE7EB',
+                            200: '#F8CFD8',
+                            300: '#F1A7B8',
+                            400: '#E26D8A',
+                            500: '#C43E68',
+                            600: '#B03060',
+                            700: '#93234D',
+                            800: '#7B1F43',
+                        },
+                        goldsoft: {
+                            300: '#E8CFA9',
+                            400: '#D4B07A',
+                            500: '#B89056',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        script: ['"Dancing Script"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(176, 48, 96, 0.12)',
+                        'card': '0 15px 35px -5px rgba(176, 48, 96, 0.08)',
+                        'sticky': '0 12px 28px -6px rgba(147, 35, 77, 0.18)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles for Scroll Animations & Decorative Elements -->
+    <style>
+        body {
+            background-color: #FFF8F6;
+            color: #4A353B;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: all 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.reveal-left {
+            transform: translateX(-32px);
+        }
+
+        .reveal.reveal-right {
+            transform: translateX(32px);
+        }
+
+        .reveal.reveal-scale {
+            transform: scale(0.94);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+        }
+
+        /* Stagger Delays */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
+        /* Gentle Floating Animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        @keyframes pulseHeart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        .animate-heart {
+            animation: pulseHeart 2.5s ease-in-out infinite;
+        }
+
+        /* Sticky Note Paper Texture Effect */
+        .sticky-note {
+            background: linear-gradient(135deg, #FFFDF9 0%, #F9EFE6 100%);
+            position: relative;
+        }
+        
+        .sticky-note::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, transparent 50%, rgba(176, 48, 96, 0.08) 50%);
+            border-top-left-radius: 8px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF8F6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F1A7B8;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B03060;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-rosebrand-200 selection:text-rosebrand-800">
+
+    <!-- Decorative Ambient Blobs -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-rosebrand-100/70 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/3 -right-32 w-[30rem] h-[30rem] bg-cream-200/80 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-rosebrand-100/50 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <header id="navbar" class="sticky top-0 z-50 transition-all duration-300 bg-cream-50/80 backdrop-blur-md border-b border-rosebrand-100/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo (Custom SVG Roof + Heart Motif) -->
+                <a href="#" class="flex items-center gap-3 group focus:outline-none">
+                    <div class="relative w-12 h-12 flex items-center justify-center bg-rosebrand-50 rounded-2xl border border-rosebrand-200/60 group-hover:scale-105 transition-transform">
+                        <svg class="w-9 h-9" viewBox="0 0 64 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Roof line -->
+                            <path d="M8 28L30 10L46 23" stroke="#B03060" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Soft Gold Curve -->
+                            <path d="M36 28C43 32 52 31 58 24" stroke="#D4B07A" stroke-width="2.5" stroke-linecap="round"/>
+                            <!-- Heart resting on roof -->
+                            <path d="M46 18.5C46 15.2 48.7 13 51.5 13C53.6 13 55.2 14.2 56 15.6C56.8 14.2 58.4 13 60.5 13C63.3 13 66 15.2 66 18.5C66 23.2 56 29.5 56 29.5C56 29.5 46 23.2 46 18.5Z" transform="translate(-10, -2)" stroke="#B03060" stroke-width="2.8" fill="#FCE7EB"/>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif font-extrabold text-xl tracking-wide text-rosebrand-600 leading-none">PRIMA</span>
+                        <span class="font-script text-xl text-rosebrand-500 -mt-1 leading-tight">Healing Space</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-[#5E434B]">
+                    <a href="#tentang" class="hover:text-rosebrand-600 transition-colors py-2">Tentang Kami</a>
+                    <a href="#layanan" class="hover:text-rosebrand-600 transition-colors py-2">Layanan</a>
+                    <a href="#keunggulan" class="hover:text-rosebrand-600 transition-colors py-2">Keunggulan</a>
+                    <a href="#harga" class="hover:text-rosebrand-600 transition-colors py-2">Biaya Sesi</a>
+                </nav>
+
+                <!-- Desktop CTA -->
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="https://wa.me/6288220916382?text=Halo%20PRIMA%20Healing%20Space,%20saya%20ingin%20bertanya%20mengenai%20jadwal%20sesi%20curhat." 
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-rosebrand-600 hover:bg-rosebrand-700 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                        <span>Mulai Curhat</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-btn" aria-label="Buka Menu Navigasi" class="md:hidden p-2.5 rounded-xl text-rosebrand-600 hover:bg-rosebrand-100/70 transition-colors focus:outline-none">
+                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cream-50/95 backdrop-blur-lg border-b border-rosebrand-100 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+            <a href="#tentang" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-[#5E434B] hover:bg-rosebrand-50 hover:text-rosebrand-600">Tentang Kami</a>
+            <a href="#layanan" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-[#5E434B] hover:bg-rosebrand-50 hover:text-rosebrand-600">Layanan Kami</a>
+            <a href="#keunggulan" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-[#5E434B] hover:bg-rosebrand-50 hover:text-rosebrand-600">Kenapa Memilih Kami</a>
+            <a href="#harga" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-[#5E434B] hover:bg-rosebrand-50 hover:text-rosebrand-600">Biaya & Booking</a>
+            <div class="pt-2">
+                <a href="https://wa.me/6288220916382?text=Halo%20PRIMA%20Healing%20Space,%20saya%20ingin%20bercerita%20dan%20booking%20sesi." 
+                   target="_blank" rel="noopener noreferrer"
+                   class="w-full flex items-center justify-center gap-2 bg-rosebrand-600 text-white font-semibold py-3.5 px-5 rounded-full shadow-md">
+                    <span>WhatsApp Sekarang: 088220916382</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="tentang" class="relative pt-10 pb-20 lg:pt-16 lg:pb-28 overflow-hidden">
+        <!-- Subtle Floral & Heart SVG Accents -->
+        <svg class="hidden lg:block absolute top-12 left-8 w-24 h-24 text-rosebrand-200/70 animate-float" viewBox="0 0 100 100" fill="none">
+            <path d="M50 85C50 85 15 62 15 36C15 23 25 14 36 14C43 14 48 18 50 23C52 18 57 14 64 14C75 14 85 23 85 36C85 62 50 85 50 85Z" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+                
+                <!-- Left Column: Brand Identity & Headline -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <!-- Tagline Pill -->
+                    <div class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rosebrand-100/90 border border-rosebrand-200/80 text-rosebrand-700 text-xs sm:text-sm font-bold tracking-wider uppercase shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-rosebrand-500 animate-ping"></span>
+                        <span>ONLINE CURHAT & PERSONAL SUPPORT</span>
+                    </div>
+
+                    <!-- Brand Title Display -->
+                    <div class="reveal delay-100 space-y-1">
+                        <div class="inline-flex items-center justify-center lg:justify-start gap-2">
+                            <h2 class="font-serif font-extrabold text-3xl sm:text-4xl text-rosebrand-600 tracking-wide">PRIMA</h2>
+                            <span class="font-script text-4xl sm:text-5xl text-rosebrand-500">Healing Space</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Hero Quote -->
+                    <h1 class="reveal delay-200 font-serif font-bold text-3xl sm:text-4xl lg:text-[2.75rem] text-[#3F2A30] leading-tight">
+                        “Ruang untuk <span class="text-rosebrand-600 italic">Bercerita</span>, <span class="text-rosebrand-600 italic">Menguatkan Diri</span>, dan Menemukan Kembali <span class="underline decoration-goldsoft-400 decoration-2 underline-offset-8">Kebahagiaan</span>.”
+                    </h1>
+
+                    <!-- Empathetic Subtext -->
+                    <p class="reveal delay-300 text-base sm:text-lg text-[#664A52] max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Kamu tidak harus memikul semuanya sendirian. Hadir sebagai rumah yang hangat dan aman bagimu untuk melepas lelah, merangkai kembali harapan, serta melangkah lebih tenang tanpa rasa takut dihakimi.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="reveal delay-400 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="https://wa.me/6288220916382?text=Halo%20PRIMA%20Healing%20Space,%20saya%20ingin%20mulai%20bercerita%20dan%20konsultasi." 
+                           target="_blank" rel="noopener noreferrer"
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-rosebrand-600 to-rosebrand-500 hover:from-rosebrand-700 hover:to-rosebrand-600 text-white font-semibold px-7 py-4 rounded-full shadow-soft hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-base">
+                            <!-- WhatsApp Icon -->
+                            <span class="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-sm">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                            </span>
+                            <span>Mulai Bercerita via WhatsApp</span>
+                        </a>
+
+                        <a href="#layanan" 
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-rosebrand-50 text-rosebrand-700 font-semibold px-7 py-4 rounded-full border border-rosebrand-200 shadow-sm transition-all">
+                            <span>Lihat Layanan Kami</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </a>
+                    </div>
+
+                    <!-- Trust Micro-Badges -->
+                    <div class="reveal delay-500 pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs sm:text-sm text-[#7A5962]">
+                        <span class="inline-flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-rosebrand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            100% Privasi Terjaga
+                        </span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-rosebrand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Sesi Online Fleksibel
+                        </span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-rosebrand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Pendampingan Penuh Empati
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right Column: Warm Comforting Visual & Pinned Sticky Note Card -->
+                <div class="lg:col-span-5 relative flex flex-col items-center">
+                    <div class="reveal reveal-scale relative w-full max-w-md">
+                        <!-- Soft Pastel Frame Card -->
+                        <div class="relative rounded-[2.25rem] bg-gradient-to-b from-rosebrand-100 via-cream-200 to-rosebrand-100/80 p-6 sm:p-8 border border-white shadow-card">
+                            
+                            <!-- Decorative Floating Hearts -->
+                            <div class="absolute -top-4 -right-3 bg-white p-3 rounded-2xl shadow-soft border border-rosebrand-100 animate-heart">
+                                <svg class="w-7 h-7 text-rosebrand-500" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+
+                            <!-- Warm Illustration Scene (Warm Tea Cup & Cozy Sanctuary SVG) -->
+                            <div class="flex flex-col items-center text-center pt-2 pb-6">
+                                <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-inner border border-rosebrand-100 mb-5 relative">
+                                    <!-- Cozy Mug + Steam + Heart Illustration -->
+                                    <svg class="w-28 h-28" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Warm Steam -->
+                                        <path d="M46 38C46 32 51 30 51 24C51 19 47 17 47 13" stroke="#E26D8A" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+                                        <path d="M62 35C62 29 67 27 67 21C67 16 63 14 63 10" stroke="#D4B07A" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+                                        <path d="M76 39C76 34 80 32 80 27" stroke="#E26D8A" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+                                        <!-- Saucer -->
+                                        <ellipse cx="60" cy="95" rx="36" ry="6" fill="#F8CFD8"/>
+                                        <!-- Mug Handle -->
+                                        <path d="M84 56H91C96.5228 56 101 60.4772 101 66V71C101 76.5228 96.5228 81 91 81H84" stroke="#B03060" stroke-width="5" stroke-linecap="round"/>
+                                        <!-- Mug Body -->
+                                        <path d="M34 48H86V76C86 85.9411 77.9411 94 68 94H52C42.0589 94 34 85.9411 34 76V48Z" fill="#FFFDFC" stroke="#B03060" stroke-width="3"/>
+                                        <!-- Heart on Mug -->
+                                        <path d="M60 79C60 79 49 71.8 49 64.5C49 60.8 51.8 58 55.2 58C57.3 58 59.1 59.1 60 60.7C60.9 59.1 62.7 58 64.8 58C68.2 58 71 60.8 71 64.5C71 71.8 60 79 60 79Z" fill="#E26D8A"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-rosebrand-600/80">Tempat Pulang yang Hangat</span>
+                            </div>
+
+                            <!-- Pinned Sticky Note Card (Matching Flyer) -->
+                            <div class="sticky-note rounded-2xl p-6 shadow-sticky border border-goldsoft-300/60 transform -rotate-2 hover:rotate-0 transition-transform duration-300 text-center">
+                                <!-- Red/Pink Pushpin -->
+                                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-rosebrand-400 to-rosebrand-700 shadow-md mx-auto -mt-9 mb-3 border-2 border-white flex items-center justify-center">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-white/70 -translate-x-0.5 -translate-y-0.5"></div>
+                                </div>
+
+                                <p class="font-script text-2xl sm:text-3xl text-[#3F2A30] leading-snug">
+                                    “Setiap Cerita Berharga,<br>
+                                    Setiap Hati Layak Didengar.”
+                                </p>
+
+                                <!-- Flourish Divider with Heart -->
+                                <div class="flex items-center justify-center gap-2 mt-3 text-rosebrand-500">
+                                    <span class="h-[1.5px] w-10 bg-gradient-to-r from-transparent to-rosebrand-400 rounded-full"></span>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    <span class="h-[1.5px] w-10 bg-gradient-to-l from-transparent to-rosebrand-400 rounded-full"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LAYANAN KAMI SECTION ==================== -->
+    <section id="layanan" class="py-20 bg-white/60 backdrop-blur-sm border-y border-rosebrand-100/70">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="reveal text-center max-w-2xl mx-auto mb-14 space-y-3">
+                <div class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-rosebrand-600 text-white text-sm font-semibold shadow-sm">
+                    <span>Layanan Kami</span>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <h2 class="font-serif font-bold text-3xl sm:text-4xl text-[#3F2A30]">
+                    Pendampingan Hangat untuk Setiap Langkahmu
+                </h2>
+                <p class="text-[#6E5058] text-sm sm:text-base">
+                    Pilih topik yang sedang membebani hatimu. Klik salah satu layanan di bawah untuk langsung terhubung dengan kami via WhatsApp.
+                </p>
+            </div>
+
+            <!-- 5 Service Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
+                
+                <!-- Service 1: Curhat dan Pendampingan Rumah Tangga -->
+                <div class="reveal delay-100 group bg-cream-100/90 hover:bg-white rounded-3xl p-7 border border-rosebrand-200/70 hover:border-rosebrand-400 shadow-card hover:shadow-soft transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosebrand-600 text-white flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform">
+                            <!-- Home Icon -->
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif font-bold text-xl text-[#3F2A30] mb-2.5 group-hover:text-rosebrand-600 transition-colors">
+                            Curhat dan Pendampingan Rumah Tangga
+                        </h3>
+                        <p class="text-sm text-[#6E5058] leading-relaxed mb-6">
+                            Ruang aman untuk mengurai dinamika pernikahan, komunikasi dengan pasangan, serta kelelahan emosional dalam menjalani peran rumah tangga.
+                        </p>
+                    </div>
+                    <button onclick="selectServiceAndBook('Curhat dan Pendampingan Rumah Tangga')" 
+                            class="inline-flex items-center gap-2 text-sm font-semibold text-rosebrand-600 hover:text-rosebrand-800 group/btn">
+                        <span>Pilih Topik Ini</span>
+                        <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </button>
+                </div>
+
+                <!-- Service 2: Menghadapi Perselingkuhan -->
+                <div class="reveal delay-200 group bg-cream-100/90 hover:bg-white rounded-3xl p-7 border border-rosebrand-200/70 hover:border-rosebrand-400 shadow-card hover:shadow-soft transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosebrand-600 text-white flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform">
+                            <!-- Broken Heart / Healing Heart Icon -->
+                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-3.2 10.2l-1.8-2.4 2.2-2.8-1.5-2.2 1.6-1 2.2 3.2-2.2 2.8 1.5 2.1-2 1.3z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif font-bold text-xl text-[#3F2A30] mb-2.5 group-hover:text-rosebrand-600 transition-colors">
+                            Menghadapi Perselingkuhan
+                        </h3>
+                        <p class="text-sm text-[#6E5058] leading-relaxed mb-6">
+                            Mendampingimu melewati fase terkejut, luka pengkhianatan, hingga menata kejernihan hati untuk mengambil keputusan terbaik bagi dirimu.
+                        </p>
+                    </div>
+                    <button onclick="selectServiceAndBook('Menghadapi Perselingkuhan')" 
+                            class="inline-flex items-center gap-2 text-sm font-semibold text-rosebrand-600 hover:text-rosebrand-800 group/btn">
+                        <span>Pilih Topik Ini</span>
+                        <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </button>
+                </div>
+
+                <!-- Service 3: Penguatan Diri Perempuan -->
+                <div class="reveal delay-300 group bg-cream-100/90 hover:bg-white rounded-3xl p-7 border border-rosebrand-200/70 hover:border-rosebrand-400 shadow-card hover:shadow-soft transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosebrand-600 text-white flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform">
+                            <!-- Woman / Person Empowerment Icon -->
+                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif font-bold text-xl text-[#3F2A30] mb-2.5 group-hover:text-rosebrand-600 transition-colors">
+                            Penguatan Diri Perempuan
+                        </h3>
+                        <p class="text-sm text-[#6E5058] leading-relaxed mb-6">
+                            Menumbuhkan kembali rasa berharga, keberanian menetapkan batasan sehat, dan kemandirian emosional agar kamu kembali bersinar.
+                        </p>
+                    </div>
+                    <button onclick="selectServiceAndBook('Penguatan Diri Perempuan')" 
+                            class="inline-flex items-center gap-2 text-sm font-semibold text-rosebrand-600 hover:text-rosebrand-800 group/btn">
+                        <span>Pilih Topik Ini</span>
+                        <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </button>
+                </div>
+
+                <!-- Service 4: Pendampingan Konflik Keluarga -->
+                <div class="reveal delay-100 lg:col-start-1 group bg-cream-100/90 hover:bg-white rounded-3xl p-7 border border-rosebrand-200/70 hover:border-rosebrand-400 shadow-card hover:shadow-soft transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rosebrand-600 text-white flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform">
+                            <!-- Family Group Icon -->
+                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif font-bold text-xl text-[#3F2A30] mb-2.5 group-hover:text-rosebrand-600 transition-colors">
+                            Pendampingan Konflik Keluarga
+                        </h3>
+                        <p class="text-sm text-[#6E5058] leading-relaxed mb-6">
+                            Membantu mengurai kesalahpahaman dengan orang tua, mertua, atau kerabat agar hati lebih lapang dan hubungan tetap terjaga bijak.
+                        </p>
+                    </div>
+                    <button onclick="selectServiceAndBook('Pendampingan Konflik Keluarga')" 
+                            class="inline-flex items-center gap-2 text-sm font-semibold text-rosebrand-600 hover:text-rosebrand-800 group/btn">
+                        <span>Pilih Topik Ini</span>
+                        <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </button>
+                </div>
+
+                <!-- Service 5: Motivasi dan Pengembangan Diri -->
+                <div class="reveal delay-200 md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-cream-100 to-rosebrand-50 hover:from-white hover:to-rosebrand-50/70 rounded-3xl p-7 border border-rosebrand-200/70 hover:border-rosebrand-400 shadow-card hover:shadow-soft transition-all duration-300 flex flex-col justify-between">
+                    <div class="flex flex-col sm:flex-row sm:items-start gap-5">
+                        <div class="w-14 h-14 shrink-0 rounded-2xl bg-rosebrand-600 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                            <!-- Star Icon -->
+                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                            </svg>
+                        </div>
+                        <div class="space-y-2.5">
+                            <h3 class="font-serif font-bold text-xl text-[#3F2A30] group-hover:text-rosebrand-600 transition-colors">
+                                Motivasi dan Pengembangan Diri
+                            </h3>
+                            <p class="text-sm sm:text-base text-[#6E5058] leading-relaxed">
+                                Saat kamu merasa kehilangan arah, lelah mengejar ekspektasi, atau ingin menata ulang tujuan hidup—mari temukan kembali potensi terbaik dan semangat barumu bersama-sama.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-5 sm:pl-[4.75rem]">
+                        <button onclick="selectServiceAndBook('Motivasi dan Pengembangan Diri')" 
+                                class="inline-flex items-center gap-2 text-sm font-semibold text-rosebrand-600 hover:text-rosebrand-800 group/btn">
+                            <span>Pilih Topik Ini</span>
+                            <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== KENAPA MEMILIH PRIMA HEALING SPACE ==================== -->
+    <section id="keunggulan" class="py-20 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Visual Card: Empathetic Sanctuary -->
+                <div class="lg:col-span-5 order-2 lg:order-1">
+                    <div class="reveal reveal-left bg-gradient-to-br from-rosebrand-600 to-rosebrand-700 rounded-[2.25rem] p-8 sm:p-10 text-white shadow-soft relative overflow-hidden">
+                        <!-- Subtle Decorative Circles -->
+                        <div class="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-white/10"></div>
+                        <div class="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-rosebrand-400/20"></div>
+
+                        <div class="relative z-10 space-y-6">
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-sm text-xs font-semibold tracking-wide">
+                                <svg class="w-4 h-4 text-rosebrand-200 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                <span>Safe & Empathetic Space</span>
+                            </div>
+
+                            <h3 class="font-script text-3xl sm:text-4xl leading-snug text-rosebrand-50">
+                                “Kamu berhak didengar sepenuhnya, tanpa disela, tanpa disalahkan.”
+                            </h3>
+
+                            <p class="text-sm sm:text-base text-rosebrand-100/90 leading-relaxed">
+                                Di PRIMA Healing Space, setiap air mata dan keraguanmu diterima dengan penuh kelembutan. Kami hadir menjadi teman perjalanan yang menenangkan pikiranmu.
+                            </p>
+
+                            <div class="pt-2 border-t border-white/15 flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm">Kerahasiaan Terjamin</p>
+                                    <p class="text-xs text-rosebrand-100/80">Ceritamu hanya berhenti di ruang ini.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Checklist Content (Exact 4 Points from Flyer) -->
+                <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
+                    <div class="reveal inline-flex items-center gap-2 px-5 py-2 rounded-full bg-rosebrand-500 text-white text-sm font-semibold shadow-sm">
+                        <span>Kenapa Memilih PRIMA Healing Space?</span>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+
+                    <h2 class="reveal delay-100 font-serif font-bold text-3xl sm:text-4xl text-[#3F2A30] leading-tight">
+                        Mendampingi dengan Hati, Membantumu Bangkit Kembali
+                    </h2>
+
+                    <div class="space-y-4 pt-2">
+                        <!-- Point 1 -->
+                        <div class="reveal delay-100 flex items-start gap-4 p-4 rounded-2xl bg-white/80 border border-rosebrand-100 shadow-sm hover:border-rosebrand-300 transition-colors">
+                            <div class="w-8 h-8 rounded-full bg-rosebrand-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-base sm:text-lg text-[#3F2A30]">Ruang curhat yang aman & nyaman</h4>
+                                <p class="text-sm text-[#6E5058] mt-0.5">Bercerita dari mana saja dengan suasana hangat, privat, dan menenangkan.</p>
+                            </div>
+                        </div>
+
+                        <!-- Point 2 -->
+                        <div class="reveal delay-200 flex items-start gap-4 p-4 rounded-2xl bg-white/80 border border-rosebrand-100 shadow-sm hover:border-rosebrand-300 transition-colors">
+                            <div class="w-8 h-8 rounded-full bg-rosebrand-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-base sm:text-lg text-[#3F2A30]">Didampingi dengan empati dan tanpa menghakimi</h4>
+                                <p class="text-sm text-[#6E5058] mt-0.5">Kami mendengarkan sudut pandang dan perasaanmu dengan penuh pengertian.</p>
+                            </div>
+                        </div>
+
+                        <!-- Point 3 -->
+                        <div class="reveal delay-300 flex items-start gap-4 p-4 rounded-2xl bg-white/80 border border-rosebrand-100 shadow-sm hover:border-rosebrand-300 transition-colors">
+                            <div class="w-8 h-8 rounded-full bg-rosebrand-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-base sm:text-lg text-[#3F2A30]">Bantuan menyusun langkah terbaik</h4>
+                                <p class="text-sm text-[#6E5058] mt-0.5">Membantumu menjernihkan pikiran agar mampu melihat solusi dan langkah ke depan.</p>
+                            </div>
+                        </div>
+
+                        <!-- Point 4 -->
+                        <div class="reveal delay-400 flex items-start gap-4 p-4 rounded-2xl bg-white/80 border border-rosebrand-100 shadow-sm hover:border-rosebrand-300 transition-colors">
+                            <div class="w-8 h-8 rounded-full bg-rosebrand-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-base sm:text-lg text-[#3F2A30]">Untukmu yang ingin bangkit dan bahagia kembali</h4>
+                                <p class="text-sm text-[#6E5058] mt-0.5">Dukungan positif agar kamu kembali menemukan kekuatan dan ketenangan batin.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PAKET & HARGA + INTERACTIVE BOOKING ==================== -->
+    <section id="harga" class="py-20 bg-gradient-to-b from-cream-100 via-rosebrand-50/70 to-cream-100 border-t border-rosebrand-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center space-y-3 mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-rosebrand-600">Investasi Ketenangan Hati</span>
+                <h2 class="font-serif font-bold text-3xl sm:text-4xl text-[#3F2A30]">
+                    Jadwalkan Sesi Ceritamu Sekarang
+                </h2>
+                <p class="text-[#6E5058] text-sm sm:text-base max-w-xl mx-auto">
+                    Biaya terjangkau dengan pendampingan penuh perhatian. Isi formulir singkat di bawah atau langsung hubungi WhatsApp kami.
+                </p>
+            </div>
+
+            <!-- Main Pricing & Booking Card -->
+            <div class="reveal reveal-scale bg-white rounded-[2.5rem] p-6 sm:p-10 lg:p-12 shadow-soft border-2 border-dashed border-rosebrand-300 relative">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+                    
+                    <!-- Left: Price & Duration Display (Matching Flyer) -->
+                    <div class="lg:col-span-5 text-center bg-gradient-to-b from-rosebrand-50 to-cream-100 rounded-3xl p-7 border border-rosebrand-200/80">
+                        <span class="inline-block px-3.5 py-1 rounded-full bg-rosebrand-100 text-rosebrand-700 text-xs font-bold uppercase tracking-wider mb-3">
+                            Sesi Personal 1-on-1
+                        </span>
+
+                        <div class="flex items-baseline justify-center gap-1 text-rosebrand-600 my-2">
+                            <span class="font-serif font-bold text-2xl sm:text-3xl">Rp</span>
+                            <span class="font-serif font-extrabold text-5xl sm:text-6xl tracking-tight">100.000</span>
+                            <span class="text-base sm:text-lg font-semibold text-[#5E434B]">/ sesi</span>
+                        </div>
+
+                        <!-- Duration Pill -->
+                        <div class="inline-flex items-center justify-center gap-2 mt-3 px-4 py-2 rounded-full bg-white border border-rosebrand-200 text-[#3F2A30] font-semibold text-sm shadow-sm">
+                            <svg class="w-4 h-4 text-rosebrand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>Durasi: 45–60 Menit</span>
+                        </div>
+
+                        <ul class="mt-6 space-y-2.5 text-left text-xs sm:text-sm text-[#5E434B] border-t border-rosebrand-200/60 pt-5">
+                            <li class="flex items-center gap-2">
+                                <span class="text-rosebrand-600 font-bold">✓</span> Konsultasi via Chat / Voice Call WhatsApp
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-rosebrand-600 font-bold">✓</span> Jadwal fleksibel sesuai kenyamananmu
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-rosebrand-600 font-bold">✓</span> Rangkuman & langkah penguatan diri
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right: Interactive WhatsApp Message Customizer -->
+                    <div class="lg:col-span-7 space-y-5">
+                        <div>
+                            <h3 class="font-serif font-bold text-xl sm:text-2xl text-[#3F2A30]">
+                                Siap untuk Bercerita?
+                            </h3>
+                            <p class="text-xs sm:text-sm text-[#6E5058] mt-1">
+                                Lengkapi data opsional di bawah agar kami dapat menyambutmu dengan lebih hangat.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label for="visitor-name" class="block text-xs font-semibold uppercase tracking-wider text-[#5E434B] mb-1.5">
+                                    Nama / Nama Panggilan (Opsional)
+                                </label>
+                                <input type="text" id="visitor-name" placeholder="Contoh: Rina / Boleh dikosongkan"
+                                       class="w-full px-4 py-3 rounded-2xl bg-cream-100 border border-rosebrand-200 focus:border-rosebrand-500 focus:ring-2 focus:ring-rosebrand-200 outline-none text-sm transition-all">
+                            </div>
+
+                            <div>
+                                <label for="service-topic" class="block text-xs font-semibold uppercase tracking-wider text-[#5E434B] mb-1.5">
+                                    Topik yang Ingin Diceritakan
+                                </label>
+                                <select id="service-topic" 
+                                        class="w-full px-4 py-3 rounded-2xl bg-cream-100 border border-rosebrand-200 focus:border-rosebrand-500 focus:ring-2 focus:ring-rosebrand-200 outline-none text-sm transition-all text-[#3F2A30]">
+                                    <option value="Curhat dan Pendampingan Rumah Tangga">Curhat dan Pendampingan Rumah Tangga</option>
+                                    <option value="Menghadapi Perselingkuhan">Menghadapi Perselingkuhan</option>
+                                    <option value="Penguatan Diri Perempuan">Penguatan Diri Perempuan</option>
+                                    <option value="Pendampingan Konflik Keluarga">Pendampingan Konflik Keluarga</option>
+                                    <option value="Motivasi dan Pengembangan Diri">Motivasi dan Pengembangan Diri</option>
+                                    <option value="Curhat Umum / Lainnya">Curhat Umum / Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Primary WhatsApp Button (Matching Flyer) -->
+                        <div class="pt-2">
+                            <button id="whatsapp-book-btn" onclick="openWhatsAppBooking()"
+                                    class="w-full group relative flex items-center justify-center gap-3.5 bg-gradient-to-r from-rosebrand-600 via-rosebrand-500 to-rosebrand-600 hover:from-rosebrand-700 hover:to-rosebrand-600 text-white py-4 px-6 rounded-full shadow-soft hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+                                <span class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-md shrink-0 group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                                </span>
+                                <div class="text-left">
+                                    <span class="block text-xs font-medium text-rosebrand-100">WhatsApp Sekarang:</span>
+                                    <span class="block text-lg sm:text-xl font-extrabold tracking-wide">088220916382</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CLOSING MOTIVATIONAL BANNER & FOOTER ==================== -->
+    <footer class="relative bg-gradient-to-br from-rosebrand-500 via-rosebrand-600 to-rosebrand-700 text-white pt-16 pb-12 overflow-hidden">
+        <!-- Decorative Gold & Light Swirls -->
+        <svg class="absolute top-0 left-0 w-full h-12 text-cream-100" preserveAspectRatio="none" viewBox="0 0 1440 48" fill="currentColor">
+            <path d="M0,0 L1440,0 L1440,12 C1100,52 450,-15 0,36 Z"></path>
+        </svg>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 text-center space-y-8 relative z-10">
+            
+            <!-- Closing Script Quote (Matching Flyer) -->
+            <div class="reveal space-y-3">
+                <p class="font-script text-3xl sm:text-5xl text-white drop-shadow-sm leading-snug">
+                    “Lepaskan Beban, Pulihkan Hati,<br class="hidden sm:inline"> Temukan Kekuatan Diri.”
+                </p>
+                <div class="flex items-center justify-center gap-3 text-goldsoft-300">
+                    <span class="h-[1.5px] w-16 bg-gradient-to-r from-transparent to-goldsoft-300"></span>
+                    <svg class="w-5 h-5 text-rosebrand-200 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span class="h-[1.5px] w-16 bg-gradient-to-l from-transparent to-goldsoft-300"></span>
+                </div>
+            </div>
+
+            <!-- Non-Clinical Disclaimer Box (Exact Text from Flyer) -->
+            <div class="reveal delay-100 max-w-2xl mx-auto bg-white/95 text-[#3F2A30] rounded-2xl px-5 py-4 shadow-lg flex items-center justify-center gap-3 text-left sm:text-center">
+                <span class="w-6 h-6 rounded-full bg-[#3F2A30] text-white flex items-center justify-center text-xs font-serif font-bold shrink-0">
+                    i
+                </span>
+                <p class="text-xs sm:text-sm font-medium leading-relaxed">
+                    Layanan ini merupakan konsultasi nonklinis yang bertujuan untuk pendampingan dan dukungan.
+                    <span class="inline-block text-rosebrand-600 ml-1">♥</span>
+                </p>
+            </div>
+
+            <!-- Bottom Brand & Copyright -->
+            <div class="pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-rosebrand-100">
+                <div class="flex items-center gap-2">
+                    <span class="font-serif font-bold text-white tracking-wider">PRIMA Healing Space</span>
+                    <span>•</span>
+                    <span>Online Curhat & Personal Support</span>
+                </div>
+                <div>
+                    <span>WhatsApp: </span>
+                    <a href="https://wa.me/6288220916382" target="_blank" rel="noopener noreferrer" class="underline hover:text-white font-semibold">088220916382</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Quick WhatsApp Button (Mobile & Desktop) -->
+    <a href="https://wa.me/6288220916382?text=Halo%20PRIMA%20Healing%20Space,%20saya%20ingin%20bercerita." 
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Chat WhatsApp PRIMA Healing Space"
+       class="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-3.5 rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 group">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+        <span class="hidden sm:inline text-sm font-semibold pr-1">Curhat Sekarang</span>
+    </a>
+
+    <!-- ==================== VANILLA JAVASCRIPT (SCROLL ANIMATIONS & INTERACTIVITY) ==================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Intersection Observer for Smooth Scroll-Reveal Animations
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Animate once smoothly
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // 2. Navbar Shadow on Scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 24) {
+                    navbar.classList.add('shadow-soft', 'bg-cream-50/95');
+                } else {
+                    navbar.classList.remove('shadow-soft', 'bg-cream-50/95');
+                }
+            });
+
+            // 3. Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('menu-icon-open');
+            const iconClose = document.getElementById('menu-icon-close');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMobileMenu() {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+        });
+
+        // 4. Select Service Card -> Scroll to Booking & Pre-fill Topic
+        function selectServiceAndBook(topicName) {
+            const topicSelect = document.getElementById('service-topic');
+            const bookingSection = document.getElementById('harga');
+            
+            if (topicSelect) {
+                topicSelect.value = topicName;
+            }
+            
+            if (bookingSection) {
+                bookingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => {
+                    const nameInput = document.getElementById('visitor-name');
+                    if (nameInput) nameInput.focus();
+                }, 650);
+            }
+        }
+
+        // 5. Build Polite WhatsApp Message & Redirect
+        function openWhatsAppBooking() {
+            const phone = '6288220916382';
+            const nameInput = document.getElementById('visitor-name').value.trim();
+            const topic = document.getElementById('service-topic').value;
+            
+            const greetingName = nameInput ? `Saya *${nameInput}*. ` : '';
+            const message = `Halo *PRIMA Healing Space* 🌸\n\n${greetingName}Saya ingin menjadwalkan sesi Online Curhat & Personal Support (Rp 100.000 / 45–60 menit).\n\n*Topik:* ${topic}\n\nMohon info jadwal yang tersedia ya. Terima kasih.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
+    </script>
+</body>
+</html>
